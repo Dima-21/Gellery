@@ -36,7 +36,14 @@
             this.PictureBox = new System.Windows.Forms.PictureBox();
             this.ListFiles = new System.Windows.Forms.ListBox();
             this.BPrev = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.BNext = new System.Windows.Forms.Button();
+            this.Mark1 = new System.Windows.Forms.RadioButton();
+            this.Mark4 = new System.Windows.Forms.RadioButton();
+            this.Mark3 = new System.Windows.Forms.RadioButton();
+            this.Mark5 = new System.Windows.Forms.RadioButton();
+            this.Mark2 = new System.Windows.Forms.RadioButton();
+            this.LComment = new System.Windows.Forms.Label();
+            this.TBComment = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -80,10 +87,12 @@
             // 
             // PictureBox
             // 
+            this.PictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.PictureBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.PictureBox.Location = new System.Drawing.Point(229, 76);
             this.PictureBox.Name = "PictureBox";
             this.PictureBox.Size = new System.Drawing.Size(212, 217);
+            this.PictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.PictureBox.TabIndex = 4;
             this.PictureBox.TabStop = false;
             // 
@@ -94,7 +103,6 @@
             this.ListFiles.Name = "ListFiles";
             this.ListFiles.Size = new System.Drawing.Size(115, 212);
             this.ListFiles.TabIndex = 5;
-            this.ListFiles.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.ListFiles_MouseDoubleClick);
             // 
             // BPrev
             // 
@@ -105,23 +113,117 @@
             this.BPrev.TabIndex = 6;
             this.BPrev.Text = "◄";
             this.BPrev.UseVisualStyleBackColor = true;
+            this.BPrev.Click += new System.EventHandler(this.BPrev_Click);
             // 
-            // button1
+            // BNext
             // 
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button1.Location = new System.Drawing.Point(447, 76);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(51, 217);
-            this.button1.TabIndex = 7;
-            this.button1.Text = "►";
-            this.button1.UseVisualStyleBackColor = true;
+            this.BNext.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.BNext.Location = new System.Drawing.Point(447, 76);
+            this.BNext.Name = "BNext";
+            this.BNext.Size = new System.Drawing.Size(51, 217);
+            this.BNext.TabIndex = 7;
+            this.BNext.Text = "►";
+            this.BNext.UseVisualStyleBackColor = true;
+            this.BNext.Click += new System.EventHandler(this.BNext_Click);
+            // 
+            // Mark1
+            // 
+            this.Mark1.AutoSize = true;
+            this.Mark1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.Mark1.Location = new System.Drawing.Point(238, 299);
+            this.Mark1.Name = "Mark1";
+            this.Mark1.Size = new System.Drawing.Size(34, 20);
+            this.Mark1.TabIndex = 8;
+            this.Mark1.TabStop = true;
+            this.Mark1.Text = "1";
+            this.Mark1.UseVisualStyleBackColor = true;
+            this.Mark1.Visible = false;
+            // 
+            // Mark4
+            // 
+            this.Mark4.AutoSize = true;
+            this.Mark4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.Mark4.Location = new System.Drawing.Point(358, 299);
+            this.Mark4.Name = "Mark4";
+            this.Mark4.Size = new System.Drawing.Size(34, 20);
+            this.Mark4.TabIndex = 9;
+            this.Mark4.TabStop = true;
+            this.Mark4.Text = "4";
+            this.Mark4.UseVisualStyleBackColor = true;
+            this.Mark4.Visible = false;
+            // 
+            // Mark3
+            // 
+            this.Mark3.AutoSize = true;
+            this.Mark3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.Mark3.Location = new System.Drawing.Point(318, 299);
+            this.Mark3.Name = "Mark3";
+            this.Mark3.Size = new System.Drawing.Size(34, 20);
+            this.Mark3.TabIndex = 10;
+            this.Mark3.TabStop = true;
+            this.Mark3.Text = "3";
+            this.Mark3.UseVisualStyleBackColor = true;
+            this.Mark3.Visible = false;
+            // 
+            // Mark5
+            // 
+            this.Mark5.AutoSize = true;
+            this.Mark5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.Mark5.Location = new System.Drawing.Point(398, 299);
+            this.Mark5.Name = "Mark5";
+            this.Mark5.Size = new System.Drawing.Size(34, 20);
+            this.Mark5.TabIndex = 11;
+            this.Mark5.TabStop = true;
+            this.Mark5.Text = "5";
+            this.Mark5.UseVisualStyleBackColor = true;
+            this.Mark5.Visible = false;
+            // 
+            // Mark2
+            // 
+            this.Mark2.AutoSize = true;
+            this.Mark2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.Mark2.Location = new System.Drawing.Point(278, 299);
+            this.Mark2.Name = "Mark2";
+            this.Mark2.Size = new System.Drawing.Size(34, 20);
+            this.Mark2.TabIndex = 12;
+            this.Mark2.TabStop = true;
+            this.Mark2.Text = "2";
+            this.Mark2.UseVisualStyleBackColor = true;
+            this.Mark2.Visible = false;
+            // 
+            // LComment
+            // 
+            this.LComment.AutoSize = true;
+            this.LComment.Location = new System.Drawing.Point(86, 320);
+            this.LComment.Name = "LComment";
+            this.LComment.Size = new System.Drawing.Size(80, 13);
+            this.LComment.TabIndex = 13;
+            this.LComment.Text = "Комментарий:";
+            this.LComment.Visible = false;
+            // 
+            // TBComment
+            // 
+            this.TBComment.Location = new System.Drawing.Point(172, 320);
+            this.TBComment.Multiline = true;
+            this.TBComment.Name = "TBComment";
+            this.TBComment.Size = new System.Drawing.Size(326, 61);
+            this.TBComment.TabIndex = 14;
+            this.TBComment.Visible = false;
+            this.TBComment.Leave += new System.EventHandler(this.TBComment_Leave);
             // 
             // FormGallery
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(578, 441);
-            this.Controls.Add(this.button1);
+            this.ClientSize = new System.Drawing.Size(578, 393);
+            this.Controls.Add(this.TBComment);
+            this.Controls.Add(this.LComment);
+            this.Controls.Add(this.Mark2);
+            this.Controls.Add(this.Mark5);
+            this.Controls.Add(this.Mark3);
+            this.Controls.Add(this.Mark4);
+            this.Controls.Add(this.Mark1);
+            this.Controls.Add(this.BNext);
             this.Controls.Add(this.BPrev);
             this.Controls.Add(this.ListFiles);
             this.Controls.Add(this.PictureBox);
@@ -147,7 +249,14 @@
         private System.Windows.Forms.PictureBox PictureBox;
         private System.Windows.Forms.ListBox ListFiles;
         private System.Windows.Forms.Button BPrev;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button BNext;
+        private System.Windows.Forms.RadioButton Mark1;
+        private System.Windows.Forms.RadioButton Mark4;
+        private System.Windows.Forms.RadioButton Mark3;
+        private System.Windows.Forms.RadioButton Mark5;
+        private System.Windows.Forms.RadioButton Mark2;
+        private System.Windows.Forms.Label LComment;
+        private System.Windows.Forms.TextBox TBComment;
     }
 }
 
