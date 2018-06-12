@@ -32,10 +32,11 @@ namespace Gallery
         {
             CurrentPictures = 0;
             DirectoryInfo InfoDir = new DirectoryInfo(TPath.Text);
+            Pictures.Clear();
             ListFiles.Items.Clear();
             foreach (var item in InfoDir.EnumerateFiles())
             {
-                if (item.Extension == ".png" || item.Extension == ".jpg" || item.Extension == ".bmp" || item.Extension == ".gif")
+                if (item.Extension == ".png" || item.Extension == ".jpg" || item.Extension == ".gif")
                 {
                     ListFiles.Items.Add(item.Name);
                     Pictures.Add(new PictureInfo { FullName = item.FullName, NamePicture = item.Name });
