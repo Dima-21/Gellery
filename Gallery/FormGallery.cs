@@ -21,6 +21,7 @@ namespace Gallery
         public FormGallery()
         {
             InitializeComponent();
+            DeSerialize();
         }
 
         private void BFolder_Click(object sender, EventArgs e)
@@ -62,14 +63,15 @@ namespace Gallery
                     Mark1.Visible = Mark2.Visible = Mark3.Visible = Mark4.Visible = Mark5.Visible = false;
                     TBComment.Visible = LComment.Visible = false;
                 }
-               
+                Serialize();
             }
         }
 
         private void FilterPicture()
         {
-            var filter = PicturesSave.Distinct() as List<PictureInfo>;
+            var filter = PicturesSave.Distinct().ToList();
             PicturesSave = filter;
+            Serialize();
         }
 
         private void BNext_Click(object sender, EventArgs e)
@@ -78,8 +80,9 @@ namespace Gallery
             {
                 CurrentPictures++;
                 PictureBox.Image = Image.FromFile(Pictures[CurrentPictures].FullName);
-                //SetValue();
+                SetValues();
             }
+            Serialize();
         }
 
         private void BPrev_Click(object sender, EventArgs e)
@@ -88,18 +91,22 @@ namespace Gallery
             {
                 CurrentPictures--;
                 PictureBox.Image = Image.FromFile(Pictures[CurrentPictures].FullName);
-                //SetValue();
+                SetValues();
             }
+            Serialize();
         }
 
-        private void SetValue()
+        private void SetValues()
         {
             if (PicturesSave.Exists(x => x.NamePicture == Pictures[CurrentPictures].NamePicture && x.Length == Pictures[CurrentPictures].Length))
             {
-                var SelItem = PicturesSave.First(x => x == Pictures[CurrentPictures]);
-                this.LComment.Text = SelItem.Comment;
+                var SelItem = PicturesSave.First(x => x.NamePicture == Pictures[CurrentPictures].NamePicture && x.Length == Pictures[CurrentPictures].Length);
+                this.TBComment.Text = SelItem.Comment;
                 switch (SelItem.Mark)
                 {
+                    case 0:
+                        Mark1.Checked = Mark2.Checked = Mark3.Checked = Mark4.Checked = Mark5.Checked = false;
+                        break;
                     case 1:
                         this.Mark1.Checked = true;
                         break;
@@ -119,14 +126,16 @@ namespace Gallery
             }
             else
             {
-                LComment.Text = "";
-                Mark1.Checked = Mark2.Checked = Mark3.Checked = Mark4.Checked = Mark5.Checked = false;
+                TBComment.Text = "";
+                
             }
         }
 
         private void TBComment_Leave(object sender, EventArgs e)
         {
             var selItem = Pictures.First(x => x.NamePicture == Pictures[CurrentPictures].NamePicture);
+            selItem.Comment = TBComment.Text;
+            selItem = PicturesSave.First(x => x.NamePicture == Pictures[CurrentPictures].NamePicture);
             selItem.Comment = TBComment.Text;
         }
 
@@ -147,6 +156,55 @@ namespace Gallery
                 {
                     PicturesSave = bf.Deserialize(fs) as List<PictureInfo>;
                 }
+            }
+        }
+
+        private void Mark1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (Mark1.Checked)
+            {
+                Pictures[CurrentPictures].Mark = 1;
+                PicturesSave.First(x => x.NamePicture == Pictures[CurrentPictures].NamePicture).Mark = 1;
+            }
+
+        }
+
+        private void Mark2_CheckedChanged(object sender, EventArgs e)
+        {
+            if (Mark2.Checked)
+            {
+                Pictures[CurrentPictures].Mark = 2;
+                PicturesSave.First(x => x.NamePicture == Pictures[CurrentPictures].NamePicture).Mark = 2;
+            }
+
+        }
+
+        private void Mark3_CheckedChanged(object sender, EventArgs e)
+        {
+            if (Mark3.Checked)
+            {
+                Pictures[CurrentPictures].Mark = 3;
+                PicturesSave.First(x => x.NamePicture == Pictures[CurrentPictures].NamePicture).Mark = 3;
+            }
+
+        }
+
+        private void Mark4_CheckedChanged(object sender, EventArgs e)
+        {
+            if (Mark4.Checked)
+            {
+                Pictures[CurrentPictures].Mark = 4;
+                PicturesSave.First(x => x.NamePicture == Pictures[CurrentPictures].NamePicture).Mark = 4;
+            }
+
+        }
+
+        private void Mark5_CheckedChanged(object sender, EventArgs e)
+        {
+            if (Mark5.Checked)
+            {
+                Pictures[CurrentPictures].Mark = 5;
+                PicturesSave.First(x => x.NamePicture == Pictures[CurrentPictures].NamePicture).Mark = 5;
             }
         }
     }

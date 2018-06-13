@@ -138,6 +138,7 @@
             this.Mark1.Text = "1";
             this.Mark1.UseVisualStyleBackColor = true;
             this.Mark1.Visible = false;
+            this.Mark1.CheckedChanged += new System.EventHandler(this.Mark1_CheckedChanged);
             // 
             // Mark4
             // 
@@ -151,6 +152,7 @@
             this.Mark4.Text = "4";
             this.Mark4.UseVisualStyleBackColor = true;
             this.Mark4.Visible = false;
+            this.Mark4.CheckedChanged += new System.EventHandler(this.Mark4_CheckedChanged);
             // 
             // Mark3
             // 
@@ -164,6 +166,7 @@
             this.Mark3.Text = "3";
             this.Mark3.UseVisualStyleBackColor = true;
             this.Mark3.Visible = false;
+            this.Mark3.CheckedChanged += new System.EventHandler(this.Mark3_CheckedChanged);
             // 
             // Mark5
             // 
@@ -177,6 +180,7 @@
             this.Mark5.Text = "5";
             this.Mark5.UseVisualStyleBackColor = true;
             this.Mark5.Visible = false;
+            this.Mark5.CheckedChanged += new System.EventHandler(this.Mark5_CheckedChanged);
             // 
             // Mark2
             // 
@@ -190,6 +194,7 @@
             this.Mark2.Text = "2";
             this.Mark2.UseVisualStyleBackColor = true;
             this.Mark2.Visible = false;
+            this.Mark2.CheckedChanged += new System.EventHandler(this.Mark2_CheckedChanged);
             // 
             // LComment
             // 
