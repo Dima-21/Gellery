@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -13,6 +14,7 @@ namespace Gallery
 {
     public partial class FormGallery : Form
     {
+        String FileData = "Pictures.data";
         List<PictureInfo> PicturesSave = new List<PictureInfo>();
         List<PictureInfo> Pictures = new List<PictureInfo>();
         int CurrentPictures;
@@ -42,7 +44,7 @@ namespace Gallery
                     if (item.Extension == ".png" || item.Extension == ".jpg" || item.Extension == ".gif")
                     {
                         ListFiles.Items.Add(item.Name);
-                        Pictures.Add(new PictureInfo { FullName = item.FullName, NamePicture = item.Name });
+                        Pictures.Add(new PictureInfo { FullName = item.FullName, NamePicture = item.Name, Length = item.Length });
                     }
                 }
 
@@ -52,14 +54,15 @@ namespace Gallery
                     TBComment.Visible = LComment.Visible = true;
                     PictureBox.Image = Image.FromFile(Pictures[0].FullName);
                     PicturesSave.AddRange(Pictures);
+                    FilterPicture();
                 }
                 else
                 {
+                    PictureBox.Image = null;
                     Mark1.Visible = Mark2.Visible = Mark3.Visible = Mark4.Visible = Mark5.Visible = false;
                     TBComment.Visible = LComment.Visible = false;
                 }
-
-                FilterPicture();
+               
             }
         }
 
@@ -75,7 +78,7 @@ namespace Gallery
             {
                 CurrentPictures++;
                 PictureBox.Image = Image.FromFile(Pictures[CurrentPictures].FullName);
-                SetValue();
+                //SetValue();
             }
         }
 
@@ -85,13 +88,13 @@ namespace Gallery
             {
                 CurrentPictures--;
                 PictureBox.Image = Image.FromFile(Pictures[CurrentPictures].FullName);
-                SetValue();
+                //SetValue();
             }
         }
 
         private void SetValue()
         {
-            if (PicturesSave.Exists(x => x.NamePicture == Pictures[CurrentPictures].NamePicture))
+            if (PicturesSave.Exists(x => x.NamePicture == Pictures[CurrentPictures].NamePicture && x.Length == Pictures[CurrentPictures].Length))
             {
                 var SelItem = PicturesSave.First(x => x == Pictures[CurrentPictures]);
                 this.LComment.Text = SelItem.Comment;
@@ -125,6 +128,26 @@ namespace Gallery
         {
             var selItem = Pictures.First(x => x.NamePicture == Pictures[CurrentPictures].NamePicture);
             selItem.Comment = TBComment.Text;
+        }
+
+        private void Serialize()
+        {
+            BinaryFormatter bf = new BinaryFormatter();
+            using (var fs = new FileStream(FileData, FileMode.OpenOrCreate))
+            {
+                bf.Serialize(fs, PicturesSave);
+            }
+        }
+        private void DeSerialize()
+        {
+            BinaryFormatter bf = new BinaryFormatter();
+            if (File.Exists(FileData))
+            {
+                using (var fs = new FileStream(FileData, FileMode.Open))
+                {
+                    PicturesSave = bf.Deserialize(fs) as List<PictureInfo>;
+                }
+            }
         }
     }
 }

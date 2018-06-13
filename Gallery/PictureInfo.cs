@@ -13,6 +13,7 @@ namespace Gallery
         public String NamePicture { get; set; }
         public String FullName { get; set; }
         public String Comment { get; set; }
+        public long Length { get; set; }
         public int Mark { get; set; }
     }
 }
